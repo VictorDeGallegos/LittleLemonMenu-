@@ -1,7 +1,6 @@
 package com.littlelemon.menu
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -22,7 +21,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProductsGrid(context: Context, products: Products) {
+fun ProductsGrid(context: Context, products: Products, startProductActivity: (ProductItem) -> Unit) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(count = 2),
         contentPadding = PaddingValues(16.dp),
@@ -41,12 +40,7 @@ fun ProductsGrid(context: Context, products: Products) {
                         contentDescription = productItem.title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.clickable {
-                            val intent = Intent(context, ProductActivity::class.java)
-                            intent.putExtra("title", productItem.title)
-                            intent.putExtra("price", productItem.price)
-                            intent.putExtra("category", productItem.category)
-                            intent.putExtra("image", productItem.image)
-                            context.startActivity(intent)
+                            startProductActivity(productItem)
                         }
                     )
                     Text(text = productItem.title)

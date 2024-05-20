@@ -21,13 +21,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { InitUI() }
+        setContent {
+            InitUI()
+        }
     }
 
     @Composable
     fun InitUI() {
         val products by productsState.collectAsState()
-        ProductsGrid(context = this@MainActivity, products = products)
+        ProductsGrid(context = this@MainActivity, products = products, startProductActivity = this::startProductActivity)
     }
 
     private fun startProductActivity(productItem: ProductItem) {
