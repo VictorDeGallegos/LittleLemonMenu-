@@ -32,10 +32,10 @@ class MainActivity : ComponentActivity() {
 
     private fun startProductActivity(productItem: ProductItem) {
         val intent = Intent(this@MainActivity, ProductActivity::class.java)
-        intent.putExtra("title", productItem.title)
-        intent.putExtra("price", productItem.price)
-        intent.putExtra("category", productItem.category)
-        intent.putExtra("image", productItem.image)
+        intent.putExtra(ProductActivity.KEY_TITLE, productItem.title)
+        intent.putExtra(ProductActivity.KEY_PRICE, productItem.price)
+        intent.putExtra(ProductActivity.KEY_CATEGORY, productItem.category)
+        intent.putExtra(ProductActivity.KEY_IMAGE, productItem.image)
         startActivity(intent)
     }
 

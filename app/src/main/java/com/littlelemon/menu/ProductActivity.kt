@@ -15,4 +15,11 @@ class ProductActivity : ComponentActivity() {
         val productItem = ProductItem(title ?: "", price, category ?: "", image)
         setContent { ProductDetails(productItem) }
     }
+
+    companion object {
+        const val KEY_TITLE = "title"
+        const val KEY_PRICE = "price"
+        const val KEY_CATEGORY = "category"
+        const val KEY_IMAGE = "image"
+    }
 }
