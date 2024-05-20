@@ -4,13 +4,12 @@ import android.content.Context
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,19 +30,25 @@ fun ProductsGrid(context: Context, products: Products, startProductActivity: (Pr
         items(
             items = products.items,
             itemContent = { productItem: ProductItem ->
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { startProductActivity(productItem) },
+                    elevation = 8.dp
                 ) {
-                    Image(
-                        painter = painterResource(id = productItem.image),
-                        contentDescription = productItem.title,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.clickable {
-                            startProductActivity(productItem)
-                        }
-                    )
-                    Text(text = productItem.title)
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(16.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = productItem.image),
+                            contentDescription = productItem.title,
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(text = productItem.title, style = MaterialTheme.typography.h6)
+                        Text(text = "${productItem.price}$", style = MaterialTheme.typography.subtitle1)
+                    }
                 }
             }
         )
