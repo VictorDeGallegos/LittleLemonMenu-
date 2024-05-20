@@ -8,11 +8,17 @@ class ProductActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val title = intent.getStringExtra("title")
-        val price = intent.getDoubleExtra("price", 0.0)
-        val category = intent.getStringExtra("category")
-        val image = intent.getIntExtra("image", -1)
+
+        // Obtén los valores de intent
+        val title = intent.getStringExtra(KEY_TITLE)
+        val price = intent.getDoubleExtra(KEY_PRICE, 0.0)
+        val category = intent.getStringExtra(KEY_CATEGORY)
+        val image = intent.getIntExtra(KEY_IMAGE, -1)
+
+        // Crea un ProductItem con los valores obtenidos
         val productItem = ProductItem(title ?: "", price, category ?: "", image)
+
+        // Pasa productItem a ProductDetails
         setContent { ProductDetails(productItem) }
     }
 
